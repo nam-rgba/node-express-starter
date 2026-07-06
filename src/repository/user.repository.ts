@@ -1,11 +1,10 @@
-import { Repository } from "typeorm";
+import { DataSource, Repository } from "typeorm";
 import z from "zod";
-import { AppDataSource } from "~/data-source.js";
 import { User } from "~/entities/user.entity.js";
 
- class UserRepository{
-    constructor(){
-        this.repo = AppDataSource.getRepository(User)
+ export class UserRepository{
+    constructor(appDataSource: DataSource) {
+        this.repo = appDataSource.getRepository(User)
     }
 
     private repo: Repository<User>;
@@ -26,6 +25,12 @@ import { User } from "~/entities/user.entity.js";
         return await this.repo.findOneBy({ id });
     }
 
+
+    // find by email ===============================================
+    public findByEmail = async (email: string) =>{
+        return await this.repo.findOneBy({email})
+    }
+
     // create new user ==============================================
     public create = async(user: Partial<User>) =>{
         const newUser = this.repo.create(user);
@@ -43,11 +48,7 @@ import { User } from "~/entities/user.entity.js";
         return await this.repo.delete(id);
     }
 
-
 }
-
-const userRepository = new UserRepository();
-export default userRepository;
 
 
 export const UserQuery = z.object({

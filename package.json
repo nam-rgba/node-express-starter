@@ -1,5 +1,5 @@
 {
-  "name": "@gapcm/starter-node",
+  "name": "@gapcm/starter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,14 +13,18 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "axios": "^1.17.0",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "handlebars": "^4.7.9",
     "jsonwebtoken": "^9.0.3",
     "lodash": "^4.18.1",
     "morgan": "^1.10.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
+    "resend": "^6.16.0",
     "typeorm": "^1.0.0",
     "zod": "^4.3.6"
   },

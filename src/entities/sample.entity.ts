@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import z from 'zod'
 
 @Entity()
- export class User {
+ export class Sample {
   @PrimaryGeneratedColumn()
   id!: number
 
@@ -11,20 +11,14 @@ import z from 'zod'
   })
   name!: string
 
-  @Column({
-    nullable: false,
-  })
-  password!: string
-
-
   @Column()
-  avatar?: string
+  image?: string
 
   @Column({
     unique: true,
     nullable: false
   })
-  email!: string
+  description!: string
 
   @Column({
     type: 'boolean',
@@ -33,19 +27,19 @@ import z from 'zod'
   isVerify: boolean = true
 }
 
-export const UserQuery = z.object({
+export const SampleQuery = z.object({
     page: z.number().int().min(1).default(1),
     limit: z.number().int().min(1).max(100).default(10),
     search: z.string().optional(),
 })
 
-export const UserCreateSchema = z.object({
+export const SampleCreateSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
-    email: z.email({ message: "Invalid email address" }),
+    description: z.string().min(1, { message: "Description is required" }),
 })
 
-export const UserParamsSchema = z.object({
-    id: z.number().int().min(1, { message: "Invalid user ID" }),
+export const SampleParamsSchema = z.object({
+    id: z.number().int().min(1, { message: "Invalid sample ID" }),
 })
 
 
